@@ -1,0 +1,33 @@
+services:
+  api:
+    container_name: teste-onfly
+    stdin_open: true
+    tty: true
+    build: .
+    ports:
+      - 8000:80
+    working_dir: /var/www/html
+    depends_on:
+      - bd
+    volumes: 
+      - ./api:/var/www/html
+    environment:
+      APP_UID: "1002"
+      APP_GID: "1002"
+  bd:
+    image: mysql
+    container_name: db-teste-onfly
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - teste-onfly-db:/var/lib/mysql
+volumes:
+  teste-onfly-db:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ${PWD}/db
