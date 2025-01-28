@@ -47,4 +47,9 @@ E então execute a migration:
 /var/www/html# php artisan migrate
 ```
 
+Para rodar o seeder que populará com um usuário de teste, execute:
+```
+/var/www/html# php artisan db:seed
+```
+
 A aplicação rodará na porta *:8000* então toda ass chamadas deverão ser feitas via Postman ou aplicações semelhantes através dessa porta.
