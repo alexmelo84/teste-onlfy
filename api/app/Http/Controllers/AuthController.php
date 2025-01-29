@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\UnauthorizedException;
@@ -13,7 +12,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class AuthController extends Controller
 {
     /**
-     * 
+     * @param Request $request
+     * @throws HttpException
+     * @return string
      */
     public function login(Request $request): string
     {
