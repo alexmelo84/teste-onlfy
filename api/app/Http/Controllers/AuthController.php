@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Application\CreateUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,5 +51,32 @@ class AuthController extends Controller
         }
 
         return '';
+    }
+
+    /**
+     * @param Request $request
+     * @throws HttpException
+     * @return string
+     */
+    public function register(Request $request): string
+    {
+        try {
+            $validator = $request->validate([
+                'name' => ['required', 'string'],
+                'email' => ['required', 'email'],
+                'password' => ['required', 'min:6'],
+            ]);
+        } catch (ValidationException $e) {
+            throw new HttpException(
+                400,
+                'Os seguintes campos são obrigatórios: ' . implode(', ', array_keys($e->errors()))
+            );
+        }
+
+        $user = new CreateUser($request->all());
+
+        return response()->json([
+            'user' => $user->create()
+        ])->getContent();
     }
 }
