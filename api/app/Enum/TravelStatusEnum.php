@@ -18,4 +18,26 @@ enum TravelStatusEnum: string {
             self::C->name
         ];
     }
+
+    /**
+     * @return array
+     */
+    public static function valuesToArray(): array
+    {
+        return [
+            self::S->value,
+            self::A->value,
+            self::C->value
+        ];
+    }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public static function searchByValue(string $value): string
+    {
+        $key = array_search($value, self::valuesToArray());
+        return self::toArray()[$key] ?? '';
+    }
 }
