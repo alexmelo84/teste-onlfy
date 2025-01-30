@@ -49,8 +49,6 @@ class AuthController extends Controller
         } catch (UnauthorizedException $e) {
             throw new HttpException($e->getCode(), $e->getMessage());
         }
-
-        return '';
     }
 
     /**
@@ -75,8 +73,6 @@ class AuthController extends Controller
 
         $user = new CreateUser($request->all());
 
-        return response()->json([
-            'user' => $user->create()
-        ])->getContent();
+        return response()->json($user->create())->getContent();
     }
 }
