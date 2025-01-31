@@ -149,6 +149,28 @@ abstract class AbstractTravel
             $params['status'] = TravelStatusEnum::searchByValue($this->params['status']);
         }
 
+        if (isset($this->params['destination']) && !empty($this->params['destination'])) {
+            $params['destination'] = $this->params['destination'];
+        }
+
+        if (isset($this->params['start_date']) && !empty($this->params['start_date'])) {
+            $startDate = DateTime::createFromFormat('d/m/Y', $this->params['start_date']);
+            $params[] = [
+                'start_date',
+                '>=',
+                $startDate->format('Y-m-d')
+            ];
+        }
+
+        if (isset($this->params['end_date']) && !empty($this->params['end_date'])) {
+            $endDate = DateTime::createFromFormat('d/m/Y', $this->params['end_date']);
+            $params[] = [
+                'end_date',
+                '<=',
+                $endDate->format('Y-m-d')
+            ];
+        }
+
         return $params;
     }
 }
