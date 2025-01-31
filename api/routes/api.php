@@ -15,4 +15,5 @@ Route::controller(TravelController::class)->group(function () {
     Route::put('travel/{id}/status', 'updateStatus')->middleware('auth:sanctum');
     Route::get('travel/{id}', 'show')->middleware('auth:sanctum');
     Route::get('travels', 'showAll')->middleware('auth:sanctum');
+    Route::put('travel/{id}/cancel', 'cancel')->middleware('auth:sanctum');
 });

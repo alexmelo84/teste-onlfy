@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Application\CancelTravelByID;
 use App\Application\CreateTravel;
 use App\Application\GetTravelByID;
 use App\Application\GetTravels;
@@ -93,5 +94,17 @@ class TravelController extends Controller
         $travel = new GetTravels($request->all());
 
         return response()->json($travel->get())->getContent();
+    }
+
+    /**
+     * @param Request $request
+     * @throws HttpException
+     * @return string
+     */
+    public function cancel(Request $request): string
+    {
+        $travel = new CancelTravelByID($request->id);
+
+        return response()->json($travel->cancel())->getContent();
     }
 }

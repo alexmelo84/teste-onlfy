@@ -19,4 +19,6 @@ interface TravelFactoryInterface
         int $id,
         string $status
     ): Travel;
+
+    public function cancel(int $id): Travel;
 }
