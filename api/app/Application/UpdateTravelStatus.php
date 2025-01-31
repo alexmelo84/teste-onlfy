@@ -43,7 +43,7 @@ class UpdateTravelStatus extends AbstractTravel
     /**
      * @return Travel
      */
-    public function create(): Travel
+    public function update(): Travel
     {
         try {
             $travel = $this->getTravel();

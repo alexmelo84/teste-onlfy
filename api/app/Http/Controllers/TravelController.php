@@ -69,7 +69,7 @@ class TravelController extends Controller
             $request->status,
         );
 
-        return response()->json($travel->create())->getContent();
+        return response()->json($travel->update())->getContent();
     }
 
     /**
