@@ -18,6 +18,11 @@ class GetTravelByID extends AbstractTravel
     protected int $travelID;
 
     /**
+     * @param int
+     */
+    protected int $userID;
+
+    /**
      * @param int $travelID
      */
     public function __construct(int $travelID)
@@ -34,6 +39,16 @@ class GetTravelByID extends AbstractTravel
             $travel = $this->getTravel();
             if (empty($travel)) {
                 throw new Exception('A viagem não foi encontrada', 404);
+            }
+        } catch (Exception $e) {
+            throw new HttpException($e->getCode(), $e->getMessage());
+        }
+
+        $this->userID = $travel->id_user;
+
+        try {
+            if (!$this->validateSameUser()) {
+                throw new Exception('Não é permitido visulizar viagens de outro usuário', 404);
             }
         } catch (Exception $e) {
             throw new HttpException($e->getCode(), $e->getMessage());
