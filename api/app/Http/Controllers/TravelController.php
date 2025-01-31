@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application\CreateTravel;
+use App\Application\GetTravelByID;
 use App\Application\UpdateTravelStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -67,6 +68,17 @@ class TravelController extends Controller
             $request->id,
             $request->status,
         );
+
+        return response()->json($travel->create())->getContent();
+    }
+
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function show(Request $request): string
+    {
+        $travel = new GetTravelByID($request->id);
 
         return response()->json($travel->create())->getContent();
     }

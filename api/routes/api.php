@@ -13,4 +13,5 @@ Route::post(
 Route::controller(TravelController::class)->group(function () {
     Route::post('travel', 'create')->middleware('auth:sanctum');
     Route::put('travel/{id}/status', 'updateStatus')->middleware('auth:sanctum');
+    Route::get('travel/{id}', 'show')->middleware('auth:sanctum');
 });
