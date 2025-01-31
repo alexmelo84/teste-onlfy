@@ -12,8 +12,6 @@ use Tests\TestCase;
 
 class CancelTravelByIDTest extends TestCase
 {
-    use RefreshDatabase;
-
     protected $cancelTravelByID;
     protected $travel;
 
