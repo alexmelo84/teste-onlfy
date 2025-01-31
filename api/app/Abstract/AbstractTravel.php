@@ -43,6 +43,11 @@ abstract class AbstractTravel
     protected string $status;
 
     /**
+     * @param array
+     */
+    protected array $params;
+
+    /**
      * @return bool
      */
     protected function validateTravelMethod(): bool
@@ -131,5 +136,19 @@ abstract class AbstractTravel
         }
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    protected function setParams(): array
+    {
+        $params = [];
+
+        if (isset($this->params['status']) && !empty($this->params['status'])) {
+            $params['status'] = TravelStatusEnum::searchByValue($this->params['status']);
+        }
+
+        return $params;
     }
 }
