@@ -5,7 +5,6 @@ namespace App\Application;
 use App\Abstract\AbstractTravel;
 use App\Models\Travel;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -29,7 +28,7 @@ class GetTravelByID extends AbstractTravel
     /**
      * @return Travel
      */
-    public function create(): Travel
+    public function get(): Travel
     {
         try {
             $travel = $this->getTravel();

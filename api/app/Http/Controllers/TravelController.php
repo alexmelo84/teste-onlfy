@@ -80,6 +80,6 @@ class TravelController extends Controller
     {
         $travel = new GetTravelByID($request->id);
 
-        return response()->json($travel->create())->getContent();
+        return response()->json($travel->get())->getContent();
     }
 }
