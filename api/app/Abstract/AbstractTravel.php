@@ -9,6 +9,7 @@ use App\Interface\TravelFactoryInterface;
 use App\Models\Travel;
 use App\Models\User;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 abstract class AbstractTravel
 {
@@ -70,6 +71,18 @@ abstract class AbstractTravel
         }
 
         return true;
+    }
+
+    /**
+     * @return bool
+     */
+    protected function validateSameUser(): bool
+    {
+        if ($this->userID === Auth::id()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

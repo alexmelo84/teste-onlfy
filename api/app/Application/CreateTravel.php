@@ -88,6 +88,14 @@ class CreateTravel extends AbstractTravel
         }
 
         try {
+            if (!$this->validateSameUser()) {
+                throw new Exception('Não é permitido criar viagens para outro usuário', 404);
+            }
+        } catch (Exception $e) {
+            throw new HttpException($e->getCode(), $e->getMessage());
+        }
+
+        try {
             if (!$this->validateStartDate()) {
                 throw new Exception('O data de início da viagem é inválida', 404);
             }
