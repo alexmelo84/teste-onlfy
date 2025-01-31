@@ -14,4 +14,9 @@ interface TravelFactoryInterface
         string $endDate,
         string $status
     ): Travel;
+
+    public function updateStatus(
+        int $id,
+        string $status
+    ): Travel;
 }

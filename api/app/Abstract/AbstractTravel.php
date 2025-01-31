@@ -6,11 +6,17 @@ use App\Enum\TravelMethodEnum;
 use App\Enum\TravelStatusEnum;
 use App\Factory\AirplaneTravelFactory;
 use App\Interface\TravelFactoryInterface;
+use App\Models\Travel;
 use App\Models\User;
 use DateTime;
 
 abstract class AbstractTravel
 {
+    /**
+     * @param int
+     */
+    protected int $travelID;
+
     /**
      * @param string
      */
@@ -103,5 +109,27 @@ abstract class AbstractTravel
                 return new AirplaneTravelFactory;
                 break;
         }
+    }
+
+    /**
+     * @return Travel|null
+     */
+    protected function getTravel(): ?Travel
+    {
+        return Travel::find($this->travelID);
+    }
+
+    /**
+     * @param int $travelUserID
+     * @param int $currentUserID
+     * @return bool
+     */
+    protected function validateSameRequestingUser(int $travelUserID, int $currentUserID): bool
+    {
+        if ($travelUserID === $currentUserID) {
+            return false;
+        }
+
+        return true;
     }
 }

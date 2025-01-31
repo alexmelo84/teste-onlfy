@@ -38,4 +38,16 @@ class AirplaneTravelFactory implements TravelFactoryInterface
 
         return $travel;
     }
+
+    public function updateStatus(
+        int $id,
+        string $status
+    ): Travel {
+        $travel = Travel::find($id);
+
+        $travel->status = TravelStatusEnum::searchByValue($status);
+        $travel->save();
+
+        return $travel;
+    }
 }
