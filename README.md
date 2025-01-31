@@ -53,3 +53,30 @@ Para rodar o seeder que populará com um usuário de teste, execute:
 ```
 
 A aplicação rodará na porta *:8000* então toda ass chamadas deverão ser feitas via Postman ou aplicações semelhantes através dessa porta.
+
+## Testes
+
+### Integração
+
+No diretório */api/resources/integration/postman* há uma coleção do Postman para ser utilizada para testes.
+
+A primeira rota deve ser a de autenticação, que fica em *Autenticação -> Login*. Se o seeder tiver sido rodado basta usar as credenciais já salvas ou utilizar as criadas por você.
+
+### Unitários
+
+Para rodar os testes unitários execute no terminal:
+```
+docker exec -it teste-onfly sh
+```
+
+Para acessar o container e depois rode o teste:
+```
+php artisan test
+```
+
+Ou
+```
+./vendor/bin/phpunit
+```
+
+Nesse momento há teste de apenas uma classe para ilustração.
