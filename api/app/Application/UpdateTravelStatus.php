@@ -72,10 +72,29 @@ class UpdateTravelStatus extends AbstractTravel
 
         $this->travelMethod = $travel->method;
 
-        $travelMethodFactory = $this->getTravelMethodFactory();
-        return $travelMethodFactory->updateStatus(
-            $this->travelID,
-            $this->status
-        );
+        try {
+            $travelMethodFactory = $this->getTravelMethodFactory();
+            $travel = $travelMethodFactory->updateStatus(
+                $this->travelID,
+                $this->status
+            );
+        } catch (Exception $e) {
+            throw new HttpException($e->getCode(), $e->getMessage());
+        }
+
+        try {
+            $data = [
+                'email' => $travel->user->email,
+                'message' => 'O status da sua viagem foi alterado para ' . $this->status
+            ];
+            $this->sendNotification(
+                new InternalNotification,
+                $data
+            );
+        } catch (Exception $e) {
+            throw new HttpException($e->getCode(), $e->getMessage());
+        }
+
+        return $travel;
     }
 }

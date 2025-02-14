@@ -5,7 +5,9 @@ namespace App\Abstract;
 use App\Enum\TravelMethodEnum;
 use App\Enum\TravelStatusEnum;
 use App\Factory\AirplaneTravelFactory;
+use App\Interface\NotificationInterface;
 use App\Interface\TravelFactoryInterface;
+use App\Jobs\SendNotification;
 use App\Models\Travel;
 use App\Models\User;
 use DateTime;
@@ -185,5 +187,15 @@ abstract class AbstractTravel
         }
 
         return $params;
+    }
+
+    /**
+     * @param NotificationInterface $notification
+     * @param array $data
+     * @return void
+     */
+    public function sendNotification(NotificationInterface $notification, array $data): void
+    {
+        SendNotification::dispatch($notification, $data);
     }
 }

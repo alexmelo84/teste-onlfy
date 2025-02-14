@@ -54,6 +54,20 @@ Para rodar o seeder que populará com um usuário de teste, execute:
 
 A aplicação rodará na porta *:8000* então toda ass chamadas deverão ser feitas via Postman ou aplicações semelhantes através dessa porta.
 
+## Filas
+
+Toda vez uma viagem tem seu status alterado uma notificação será enviada, mas ficará numa fila para processo assíncrono.
+
+Nesse momento a fila usa a opção *database* para servir de exemplo. Os itens da fila podem ser vistos na tabela *jobs*.
+
+Para rodar a fila, execute o comando:
+
+```
+php artisan queue:work
+```
+
+E para ver que o envio da notificação foi feito, consulte a tabela *notifications*. Nesse ponto foi considerado apenas um sistema interno de notificações, mas pode-se adicionar outras formas pois o *job* espera uma interface de notificação.
+
 ## Testes
 
 ### Integração
